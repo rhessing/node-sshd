@@ -32,7 +32,7 @@ RUN echo "" >> /etc/ssh/sshd_config \
     && chmod 755 /bin/tini \
     && chmod 755 /usr/local/bin/docker-entrypoint.sh \
     && mkdir -p /usr/app \
-    && addgroup -gid 9876 node \
+    && getent group node || addgroup -gid 9876 node \
     && adduser -uid 9876 -gid 9876 --shell /bin/bash --disabled-password --gecos '' node \
     && passwd -u node \
     && mkdir -p /home/node/.ssh \
