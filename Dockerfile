@@ -1,4 +1,4 @@
-FROM python:buster
+FROM node:bullseye
 MAINTAINER R. Hessing
 
 # Set default timezone to UTC
@@ -7,11 +7,16 @@ ENV TINI_VERSION v0.19.0
 
 # Install requirements for Tini and PHP extension builds
 RUN apt-get update && apt-get install --no-install-recommends -y \
+        build-essential \
         default-mysql-client \
         git \
+        npm \
         openssh-server \
         unzip \
         zip
+
+# Install ulixee hero
+RUN npm i --save @ulixee/hero
 
 # Install tiny
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
@@ -25,14 +30,14 @@ RUN echo "" >> /etc/ssh/sshd_config \
     && chmod 755 /bin/tini \
     && chmod 755 /usr/local/bin/docker-entrypoint.sh \
     && mkdir -p /var/data \
-    && addgroup -gid 9876 python \
-    && adduser -uid 9876 -gid 9876 --shell /bin/bash --disabled-password --gecos '' python \
-    && passwd -u python \
-    && mkdir -p /home/python/.ssh \
-    && mkdir -p /home/python/.vscode-server \
-    && chown python:python /home/python/.ssh \
-    && chown python:python /home/python/.vscode-server \
-    && chmod 0700 /home/python/.ssh
+    && addgroup -gid 9876 node \
+    && adduser -uid 9876 -gid 9876 --shell /bin/bash --disabled-password --gecos '' node \
+    && passwd -u node \
+    && mkdir -p /home/node/.ssh \
+    && mkdir -p /home/node/.vscode-server \
+    && chown node:node /home/node/.ssh \
+    && chown node:node /home/node/.vscode-server \
+    && chmod 0700 /home/node/.ssh
 
 # Cleanup
 RUN rm -rf /tmp/* \
