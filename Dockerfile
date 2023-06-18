@@ -32,14 +32,15 @@ RUN echo "" >> /etc/ssh/sshd_config \
     && chmod 755 /bin/tini \
     && chmod 755 /usr/local/bin/docker-entrypoint.sh \
     && mkdir -p /usr/app \
-    && getent group node || addgroup -gid 9876 node \
-    && adduser -uid 9876 -gid 9876 --shell /bin/bash --disabled-password --gecos '' node \
-    && passwd -u node \
-    && mkdir -p /home/node/.ssh \
-    && mkdir -p /home/node/.vscode-server \
-    && chown node:node /home/node/.ssh \
-    && chown node:node /home/node/.vscode-server \
-    && chmod 0700 /home/node/.ssh
+    && addgroup -gid 9876 dev \
+    && adduser -uid 9876 -gid 9876 --shell /bin/bash --disabled-password --gecos '' dev \
+    && passwd -u dev \
+    && mkdir -p /home/dev/.ssh \
+    && mkdir -p /home/dev/.vscode-server \
+    && chown dev:dev /home/dev/.ssh \
+    && chown dev:dev /home/dev/.vscode-server \
+    && chmod 0700 /home/dev/.ssh \
+    && ln -fsn /home/dev/app /usr/app
 
 # Cleanup
 RUN rm -rf /tmp/* \
