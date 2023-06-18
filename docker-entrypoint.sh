@@ -17,10 +17,10 @@ fi
 
 # Because kubernetes config maps cannot have a defined owner
 # just move authorized_keys.cmap to the correct location and set the correct user
-if [ -f "/home/python/.ssh/authorized_keys.cmap" ]; then
-  cp /home/python/.ssh/authorized_keys.cmap /home/python/.ssh/authorized_keys \
-  && chmod 600 /home/python/.ssh/authorized_keys \
-  && chown python:python /home/python/.ssh/authorized_keys
+if [ -f "/home/node/.ssh/authorized_keys.cmap" ]; then
+  cp /home/node/.ssh/authorized_keys.cmap /home/node/.ssh/authorized_keys \
+  && chmod 600 /home/node/.ssh/authorized_keys \
+  && chown node:node /home/python/.ssh/authorized_keys
 fi
 
 /usr/sbin/sshd -D -e
