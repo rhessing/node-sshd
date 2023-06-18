@@ -5,6 +5,8 @@ MAINTAINER R. Hessing
 ENV TZ=Etc/UTC
 ENV TINI_VERSION v0.19.0
 
+WORKDIR /usr/app
+
 # Install requirements for Tini and PHP extension builds
 RUN apt-get update && apt-get install --no-install-recommends -y \
         build-essential \
@@ -29,7 +31,7 @@ RUN echo "" >> /etc/ssh/sshd_config \
     && echo "ClientAliveInterval 3" >> /etc/ssh/sshd_config \
     && chmod 755 /bin/tini \
     && chmod 755 /usr/local/bin/docker-entrypoint.sh \
-    && mkdir -p /var/data \
+    && mkdir -p /usr/app \
     && addgroup -gid 9876 node \
     && adduser -uid 9876 -gid 9876 --shell /bin/bash --disabled-password --gecos '' node \
     && passwd -u node \
