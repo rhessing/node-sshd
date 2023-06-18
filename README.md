@@ -4,7 +4,7 @@ A Node image for developing and testing node code with an embedded SSH server to
 The image is based on the latest official node bullseye image
 
 ## Default SSH user
-The default user for SSH login is node. The user does not have a password set, a public key is required.
+The default user for SSH login is `dev`. The user does not have a password set, a public key is required.
 
 ## Public key
 The public key is configured using a bind mount. The location within the container is: /home/node/.ssh/authorized_keys
