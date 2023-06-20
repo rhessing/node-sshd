@@ -22,7 +22,7 @@ jobs:
           base-image: ${{ env. BASE_IMAGE }}
           image: ${{ env.DOCKER_HUB_NAMESPACE }}/${{ github.repository }}:latest
 
-build:
+  build:
     needs: check
     runs-on: ubuntu-latest
     if: needs.check.outputs.needs-updating == 'true'
