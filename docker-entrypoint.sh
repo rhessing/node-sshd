@@ -17,6 +17,7 @@ fi
 
 # Because kubernetes config maps cannot have a defined owner
 # just move authorized_keys.cmap to the correct location and set the correct user
+# Test
 if [ -f "/home/dev/.ssh/authorized_keys.cmap" ]; then
   cp /home/dev/.ssh/authorized_keys.cmap /home/dev/.ssh/authorized_keys \
   && chmod 600 /home/dev/.ssh/authorized_keys \
