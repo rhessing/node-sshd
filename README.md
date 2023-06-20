@@ -1,4 +1,4 @@
-# node-sshd
+# Node SSHD
 A Node image for developing and testing node code with an embedded SSH server to connect to using Visual Studio Code
 
 The image is based on the latest official node bullseye image
