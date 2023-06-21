@@ -8,10 +8,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-env:
-  REGISTRY: hub.docker.com
-  DOCKER_HUB_NAMESPACE: rhessing
-
 jobs:
   build:
     runs-on: ubuntu-latest
