@@ -2,7 +2,11 @@ name: nightly build
 
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '15 04 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
   REGISTRY: hub.docker.com
