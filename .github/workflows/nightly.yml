@@ -1,4 +1,4 @@
-name: Check docker base image
+name: nightly build
 
 on:
   schedule:
@@ -10,22 +10,8 @@ env:
   BASE_IMAGE: node:bullseye
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    outputs:
-      needs-updating: ${{ steps.check.outputs.needs-updating }}
-    steps:
-      - name: Check if update available
-        id: check
-        uses: lucacome/docker-image-update-checker@v1
-        with:
-          base-image: ${{ env. BASE_IMAGE }}
-          image: ${{ env.DOCKER_HUB_NAMESPACE }}/${{ github.repository }}:latest
-
   build:
-    needs: check
     runs-on: ubuntu-latest
-    if: needs.check.outputs.needs-updating == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
